@@ -15,4 +15,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Example.Services.Catalog.Domain\Example.Services.Catalog.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

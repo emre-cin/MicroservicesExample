@@ -1,4 +1,4 @@
-﻿namespace Example.Services.Catalog.Dtos
+﻿namespace Example.Services.Catalog.Domain.Models.Dtos
 {
     public class CategoryDto : BaseDto
     {

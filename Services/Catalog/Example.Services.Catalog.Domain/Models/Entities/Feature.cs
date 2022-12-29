@@ -1,9 +1,9 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
-namespace Example.Services.Catalog.Dtos
+namespace Example.Services.Catalog.Domain.Models.Entities
 {
-    public class FeatureDto : BaseDto
+    public class Feature : BaseEntity
     {
         public int Duration { get; set; }
 

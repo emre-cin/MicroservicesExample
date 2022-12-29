@@ -1,4 +1,4 @@
-﻿namespace Example.Services.Catalog.Models
+﻿namespace Example.Services.Catalog.Domain.Models.Entities
 {
     public class Category : BaseEntity
     {
