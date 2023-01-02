@@ -9,13 +9,6 @@ namespace Example.Services.Catalog.API.Controllers
     [Route("api/[controller]")]
     public class CourseController : BaseApiController
     {
-        //private readonly IRepository<Course> _repository;
-
-        //public CourseController(IRepository<Course> repository)
-        //{
-        //    _repository = repository;
-        //}
-
         [HttpGet]
         public async Task<IActionResult> GetById(string id) => CreateActionResultInstance(await Mediator.Send(new GetByIdQuery(id)));
     }
