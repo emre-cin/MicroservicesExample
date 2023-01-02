@@ -1,9 +1,10 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
+using Example.Services.Catalog.Domain.Models.Entities.Base;
 
 namespace Example.Services.Catalog.Domain.Models.Entities
 {
-    public class Course : BaseEntity
+    public class Course : MongoEntity
     {
         [BsonId, BsonRepresentation(BsonType.ObjectId)]
         public string UserId { get; set; }

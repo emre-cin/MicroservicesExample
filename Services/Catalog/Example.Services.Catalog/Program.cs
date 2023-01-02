@@ -1,29 +1,47 @@
+using Example.Services.Catalog.Core.Repository;
 using Example.Services.Catalog.Domain.Models.Settings;
-using Microsoft.Extensions.Configuration;
+using MediatR;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
-using MongoDB.Driver.Core.Configuration;
+using System.Reflection;
+
+#region Application Settings
 
 var builder = WebApplication.CreateBuilder(args);
 IConfiguration configuration = builder.Configuration;
 
-
 // Add services to the container.
-
 builder.Services.AddControllers();
+
+builder.Services.Configure<DatabaseSettings>(configuration.GetSection("DatabaseSettings"));
+builder.Services.AddSingleton<IDatabaseSettings>(sp => sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
+
+//var assembly = AppDomain.CurrentDomain.Load("Example.Services.Catalog.API");
+//builder.Services.AddMediatR(assembly);
+
+//assembly = AppDomain.CurrentDomain.Load("Example.Services.Catalog.Domain");
+//builder.Services.AddMediatR(assembly);
+
+var assembly = AppDomain.CurrentDomain.Load("Example.Services.Catalog.Core");
+builder.Services.AddMediatR(assembly);
+
+
+#endregion
+
+#region Swagger
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Microservice Example Catalog Api", Version = "v1" });
 });
+#endregion
 
+#region Injection
 
-builder.Services.Configure<DatabaseSettings>(configuration.GetSection("DatabaseSettings"));
-builder.Services.AddSingleton<IDatabaseSettings>(sp =>
-{
-    return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
-});
+builder.Services.AddTransient(typeof(IRepository<>), typeof(MongoRepository<>));
+
+#endregion
 
 var app = builder.Build();
 
