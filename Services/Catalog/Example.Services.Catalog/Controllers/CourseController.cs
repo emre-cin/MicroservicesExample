@@ -9,7 +9,7 @@ namespace Example.Services.Catalog.API.Controllers
     [Route("api/[controller]")]
     public class CourseController : BaseApiController
     {
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id) => CreateActionResultInstance(await Mediator.Send(new GetByIdQuery(id)));
     }
 }

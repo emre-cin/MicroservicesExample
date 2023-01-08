@@ -1,3 +1,4 @@
+using Example.Services.Catalog.Core.Mapper;
 using Example.Services.Catalog.Core.Repository;
 using Example.Services.Catalog.Domain.Models.Settings;
 using MediatR;
@@ -16,15 +17,10 @@ builder.Services.AddControllers();
 builder.Services.Configure<DatabaseSettings>(configuration.GetSection("DatabaseSettings"));
 builder.Services.AddSingleton<IDatabaseSettings>(sp => sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 
-//var assembly = AppDomain.CurrentDomain.Load("Example.Services.Catalog.API");
-//builder.Services.AddMediatR(assembly);
-
-//assembly = AppDomain.CurrentDomain.Load("Example.Services.Catalog.Domain");
-//builder.Services.AddMediatR(assembly);
-
 var assembly = AppDomain.CurrentDomain.Load("Example.Services.Catalog.Core");
 builder.Services.AddMediatR(assembly);
 
+builder.Services.AddSingleton<IMapper, Example.Services.Catalog.Core.Mapper.Mapster>();
 
 #endregion
 
