@@ -1,15 +1,30 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 using Example.Services.Catalog.Domain.Models.Entities.Base;
+using Example.Services.Catalog.Domain.Models.Commands;
 
 namespace Example.Services.Catalog.Domain.Models.Entities
 {
     public class Course : MongoEntity
     {
-        [BsonId, BsonRepresentation(BsonType.ObjectId)]
+        public Course()
+        {
+
+        }
+        public Course(CreateCourseCommand command)
+        {
+            UserId = command.UserId;
+            CategoryId = command.CategoryId;
+            Name = command.Name;
+            Price = command.Price;
+            Picture = command.Picture;
+            Description = command.Description;
+        }
+
+        [BsonRepresentation(BsonType.ObjectId)]
         public string UserId { get; set; }
 
-        [BsonId, BsonRepresentation(BsonType.ObjectId)]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string CategoryId { get; set; }
 
         public string Name { get; set; }
