@@ -3,7 +3,6 @@ using Example.Services.Catalog.Core.Repository;
 using Example.Services.Catalog.Domain.Models.Commands;
 using Example.Services.Catalog.Domain.Models.Dtos;
 using Example.Services.Catalog.Domain.Models.Entities;
-using Example.Services.Catalog.Domain.Models.Queries.Course;
 using Example.Shared.Dtos;
 using MediatR;
 using System.Net;
