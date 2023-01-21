@@ -41,9 +41,8 @@ namespace Example.Services.Identity.API
 
             try
             {
-
                 var host = CreateHostBuilder(args).Build();
-
+                 
                 using (var scope = host.Services.CreateScope())
                 {
                     var serviceProvider = scope.ServiceProvider;
@@ -52,11 +51,10 @@ namespace Example.Services.Identity.API
                     applicationDbContext.Database.Migrate();
 
                     var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-                     
+                       
                     if (!userManager.Users.Any())
                         userManager.CreateAsync(new ApplicationUser { UserName = "emre", Email = "e.cin@outlook.com", City = "İstanbul" }, "Pass123*").Wait();
                 }
-
 
                 Log.Information("Starting host...");
                 host.Run();
